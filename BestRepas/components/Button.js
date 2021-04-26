@@ -20,17 +20,17 @@ const styles = StyleSheet.create({
 
     button:{
         borderRadius:15,
-        paddingVertical:15,
+        paddingVertical: 5,
         paddingHorizontal:10,
         backgroundColor:"#CC8F37",
-        width:'30%',
+        width:'35%',
         left: '35%',
-        top: 120,
-        height: 40,
+        top: 10,
+        height:30 ,
     },
     buttonText:{
         color:"black",
         textAlign:'center',
-        marginBottom: 10,
+        marginBottom: 20,
     }
 })
