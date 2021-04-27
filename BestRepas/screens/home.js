@@ -19,11 +19,12 @@ const Home = ({navigation}) => {
         "https://image.freepik.com/vecteurs-libre/fond-tableau-noir-vecteur-tableau-noir-traces-craie_1284-44064.jpg"
 
     }
-        function renderCategories(){
+
+           function RenderCategories(){
         return(
            <View style={{flexDirection:'row'}}>
-               <View style={{marginBottom:30}}>
-                 <AntDesign style={{fontSize:90, marginLeft:90}} name="shoppingcart" size={24} color="black" 
+               <View style={{marginBottom:0}}>
+                 <AntDesign style={{fontSize:30, marginLeft:350,}} name="shoppingcart" size={10} color="white" 
                  onPress={() => navigation.navigate('Cart', {
                     
                   }) 
@@ -33,6 +34,8 @@ const Home = ({navigation}) => {
            </View>
         )
     }
+    
+
     function renderList(){
   return (
     <View>
@@ -45,6 +48,7 @@ const Home = ({navigation}) => {
             >
                 <View style={styles.DarkOverlay}></View>
                 <View style={styles.HeaderContainer}>
+                <RenderCategories/>
                     <Text style={styles.UserGreet}> Welcome</Text>
                     <Text style={styles.UserText}> To The best Ramadan Table </Text>
                 </View>   
@@ -70,23 +74,22 @@ const Home = ({navigation}) => {
                             <View style={{marginTop:10,marginHorizontal:20,flexDirection:'row',justifyContent:'center',}}>
                                 <Text style={{fontSize:18,fontWeight:'bold', textAlign:'center'}}>${item.price}</Text>
                             </View>
-                            {/* <Icon name="add"  size={40}  style={{justifyContent:'center', color:'orange', alignItems:'center' }}/> */}
-                            {/* <FlatButton text='Buy' /> */}
 
                             <TouchableOpacity
                                 onPress={()=> onClickAddCart(item)}
                                     style={{
-                                        width:'100%',
-                                        backgroundColor:'#fd7e14',
+                                        width:'40%',
+                                        backgroundColor:'orange',
                                         flexDirection:'row',
                                         alignItems:'center',
                                         justifyContent:"center",
                                         borderRadius:5,
-                                        padding:4
+                                        marginTop:20,
+                                        marginLeft:45,
+                                        padding:6
                                     }}>
-                                <Text style={{fontSize:18, color:"white", fontWeight:"bold"}}>Add Cart</Text>
-                                <View style={{width:10}} />
-                                <Icon name="ios-add-circle" size={30} color={"white"} />
+                                <Text style={{fontSize:10, color:"white", fontWeight:"bold"}}>Add Cart</Text>
+                               
                             </TouchableOpacity>
                     </View>
         )} />
@@ -127,7 +130,7 @@ const Home = ({navigation}) => {
       }
     return (
         <SafeAreaView style={styles.container}>
-             {renderCategories()}
+             {RenderCategories()}
              {renderList()}
         </SafeAreaView>
     )
@@ -157,7 +160,7 @@ const styles = StyleSheet.create({
       fontWeight: 'bold',
       textAlign: 'center',
       color: 'white',
-      top: 50
+      top: 30
   },
   Button:{
       width: 20,
@@ -170,7 +173,7 @@ const styles = StyleSheet.create({
       fontWeight: 'normal',
       color: 'orange',
       textAlign: 'center',
-      top: 80
+      top: 50
   },
   card:{
           height: 240,

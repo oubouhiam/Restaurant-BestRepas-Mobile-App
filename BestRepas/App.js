@@ -5,7 +5,8 @@ import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Home from './screens/home';
+import { AntDesign } from '@expo/vector-icons';
+import Home from './screens/Home';
 import Cart from './screens/Cart';
 
 const Stack = createStackNavigator();

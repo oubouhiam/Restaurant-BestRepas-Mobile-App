@@ -4,29 +4,57 @@ import React from 'react'
 import { useEffect } from 'react';
 import { useState } from 'react';
 import {AsyncStorage}  from 'react-native';
-import { Text, View, ScrollView, Image, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
+import { Text, View, ScrollView, Image, TouchableOpacity, StyleSheet, ToastAndroid } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 
 // import icons
 import Icon from 'react-native-vector-icons/Ionicons';
 
+
+
 const Cart = () => {
+
+
+  const showToast = () => {
+    ToastAndroid.showWithGravity(
+      "Your Order has been saved Successfully Net to pay: 10 $",
+      ToastAndroid.LONG,
+      ToastAndroid.TOP,
+      60,
+      80
+    );
+  };
 
     const [dataCart, setdataCart] = useState([])
 
-    useEffect(()=>{
-        AsyncStorage.getItem('cart').then((cart)=>{
-          // if (cart !== null) {
-          //   // We have data!!
-          //   const cartfood = JSON.parse(cart)
-          //   setdataCart(cartfood)
-          // }
-          AsyncStorage.clear()
+
+    const [total, settotal] = useState()
+    // console.log("hzlli" + totalc)
+
+    useEffect(() => {
+        AsyncStorage.getItem('cart').then((cart) => {
+            if (cart !== null) {
+                // We have data!!
+                const cartfood = JSON.parse(cart)
+                let total = 0
+                total = cartfood.reduce((prev, next) => prev + next.price, 0);
+                settotal(total)
+                console.log(total)
+                setdataCart(cartfood)
+            }
+            
+
+          //  AsyncStorage.clear()
+
+
         })
-        .catch((err)=>{
-          alert(err)
-        })
-      })
+
+            .catch((err) => {
+                alert(err)
+            })
+    }, [])
+
+    
     
 
     return (
@@ -51,18 +79,18 @@ const Cart = () => {
                       }}>
                       <Text style={{fontWeight: 'bold', fontSize: 16}}>{item.food.name}</Text>
                       <Text style={{fontSize: 13, color: 'grey'}}>
-                        hhhhhhh
+                        
                       </Text>
                       <Text style={{fontSize: 17, fontWeight: 'bold'}}>${item.food.price}</Text>
                     </View>
                    
                       <View style={{flexDirection:'row', alignItems:'center'}}>
                         <TouchableOpacity>
-                            <Icon name="ios-remove-circle" size={30} color={"#9fd236"} />
+                            <Icon name="ios-remove-circle" size={30} color={"orange"} />
                         </TouchableOpacity>
                         <Text style={{paddingHorizontal:8, fontWeight:'bold'}}>1</Text>
                         <TouchableOpacity>
-                            <Icon name="ios-add-circle" size={30} color={"#9fd236"} />
+                            <Icon name="ios-add-circle" size={30} color={"orange"} />
                         </TouchableOpacity>
                         </View>
                       <View style={style.actionBtn}>
@@ -77,8 +105,13 @@ const Cart = () => {
 
              <View style={{height:20}} />
 
-             <TouchableOpacity style={{
-                 backgroundColor:"#FFB833",
+             <View>
+               <Text style={{paddingHorizontal:8, fontWeight:'bold', textAlign:'center', fontSize:30}}>Total: {total}$</Text>
+             </View>
+
+
+             <TouchableOpacity onPress={() => showToast()} style={{
+                 backgroundColor:"orange",
                 
                  alignItems:'center',
                  padding:10,
@@ -86,7 +119,7 @@ const Cart = () => {
                  margin:20
                }}>
                <Text style={{
-                   fontSize:20,
+                   fontSize:10,
                    fontWeight:"bold",
                    color:'white'
                  }}>
